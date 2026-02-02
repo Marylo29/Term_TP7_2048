@@ -1,6 +1,6 @@
 """Module providing the logic of the 2048 game"""
 
-import random
+from random import randint
 from typing import List, Tuple
 
 TAILLE:int = 4
@@ -65,7 +65,9 @@ def _ajouter_tuile(plateau: List[List[int]]) -> List[List[int]]:
     :return: Une nouvelle grille avec une tuile ajoutée.
     :rtype: List[List[int]]
     """
-    raise NotImplementedError("Fonction _ajouter_tuile non implémentée.")
+    tuiles_vides = _get_cases_vides(plateau)
+    endroit = tuiles_vides[randint(0,len(tuiles_vides)-1)]
+    return [[plateau[i][j] if (i,j) != endroit else (2 if randint(0,9) > 0 else 4) for i in range(len(plateau))] for j in range(len(plateau))]
 
 def _supprimer_zeros(ligne: List[int]) -> List[int]:
     """
