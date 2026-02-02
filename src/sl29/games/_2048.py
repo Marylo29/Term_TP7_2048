@@ -120,15 +120,33 @@ def _completer_zeros(ligne,taille = TAILLE): # ajouter les annotations de type
 
 def _deplacer_gauche(plateau) : # ajouter les annotations de type
     """
-    DOCSTRING À ÉCRIRE
+    Crée la nouvelle grille lors d'un déplacement sur la gauche
+
+    :param plateau: La grille actuelle.
+    :type plateau: List[List[int]]
+    :return: La grille après déplacement, les points gagnés
+    :rtype: Tuple[List[List[int]], int]
     """
-    raise NotImplementedError("Fonction _deplacer_gauche non implémentée.")
+    nouv_plateau = []
+    nouv_points = 0
+    for ligne in plateau:
+        ligne_sans_zero = _supprimer_zeros(ligne)
+        ligne_fus,points = _fusionner(ligne_sans_zero)
+        nouv_points += points
+        ligne_fin = _completer_zeros(ligne_fus)
+        nouv_plateau.append(ligne_fin)
+    return nouv_plateau,nouv_points
 
 def _inverser_lignes(plateau): # ajouter les annotations de type
     """
-    DOCSTRING À ÉCRIRE
+    Crée la grille symetrique par rapport aux ordonées
+
+    :param plateau: La grille actuelle.
+    :type plateau: List[List[int]]
+    :return: La grille après changements
+    :rtype: List[List[int]]
     """
-    raise NotImplementedError("Fonction _inverser_lignes non implémentée.")
+    return [ligne.copy()[::-1] for ligne in plateau]
 
 def _deplacer_droite(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     """

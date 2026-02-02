@@ -85,7 +85,7 @@ def test__supprimer_zeros():
     )
     for liste,expected in listes:
         value = _supprimer_zeros(liste)
-        assert value == expected,f"Le resultat de _supprimmer_zeros sur {liste} devrai être {expected} mais vaut {value}"
+        assert value == expected,f"Le resultat de _supprimmer_zeros sur {liste} devrait être {expected} mais vaut {value}"
     print("OK")
 
 def test__fusionner():
@@ -157,7 +157,21 @@ def test__deplacer_gauche():
 
 def test__inverser_lignes():
     print("----> Tests de _inverser_lignes...")
-    raise NotImplementedError("Tests de _inverser_lignes non implémentés.")
+    plateau = [
+        [0,0,2,0],
+        [2,2,0,0],
+        [0,2,0,0],
+        [0,0,2,0],
+    ]
+    attendu = [
+        [0,2,0,0],
+        [0,0,2,2],
+        [0,0,2,0],
+        [0,2,0,0],
+    ]
+    resultat = _inverser_lignes(plateau)
+    assert attendu == resultat,f"Le resultat de _supprimmer_zeros sur {plateau} devrait être {attendu} mais vaut {resultat}"
+    assert plateau != resultat, "Le plateau original ne doit pas être modifié"
     print("OK")
 
 def test__deplacer_droite():
