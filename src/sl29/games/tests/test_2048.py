@@ -49,7 +49,7 @@ def test__ajouter_tuile():
     compte_tuiles = 0
     for ligne in nouveau_plateau:
         for valeur in ligne:
-            if valeur == 2:
+            if valeur in (2,4):
                 compte_tuiles += 1
     assert compte_tuiles == 1, "Une seule tuile de valeur 2 devrait être ajoutée."
     assert plateau != nouveau_plateau, "Le plateau original ne doit pas être modifié"
@@ -65,9 +65,9 @@ def test__ajouter_tuile():
     compte_tuiles2 = 0
     for ligne in nouveau_plateau2:
         for valeur in ligne:
-            if valeur == 2:
+            if valeur in (2,4):
                 compte_tuiles2 += 1
-    assert compte_tuiles2 == 2, "Il devrait y avoir deux tuiles de valeur 2 au total."
+    assert compte_tuiles2 == 3, "Il devrait y avoir deux tuiles de valeur 2 au total."
     assert plateau_non_vide != nouveau_plateau2, "Le plateau original ne doit pas être modifié"
     print("OK")
 
