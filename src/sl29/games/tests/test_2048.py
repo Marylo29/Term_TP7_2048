@@ -73,7 +73,19 @@ def test__ajouter_tuile():
 
 def test__supprimer_zeros():
     print("----> Tests de _supprimer_zeros...")
-    raise NotImplementedError("Tests de _supprimer_zeros non implémentés.")
+    listes = (
+        ([4,0,0,0],[4]),
+        ([4,0,2,0],[4,2]),
+        ([2,0,4,0],[2,4]),
+        ([4,16,32,16],[4,16,32,16]),
+        ([0,0,0,0],[]),
+        ([4,0,0,2],[4,2]),
+        ([0,4,0,0],[4]),
+        ([0,0,4,0],[4]),
+    )
+    for liste,expected in listes:
+        value = _supprimer_zeros(liste)
+        assert value == expected,f"Le resultat de _supprimmer_zeros sur {liste} devrai être {expected} mais vaut {value}"
     print("OK")
 
 def test__fusionner():
