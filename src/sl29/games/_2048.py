@@ -105,11 +105,18 @@ def _fusionner(ligne: List[int]) -> Tuple[List[int], int]:
             i += 1
     return fusion,points
 
-def _completer_zeros(ligne): # ajouter les annotations de type
+def _completer_zeros(ligne,taille = TAILLE): # ajouter les annotations de type
     """
-    DOCSTRING À ECIRE
+    Complète la ligne avec des zéros.
+
+    :param ligne: Une ligne sans zéros.
+    :type ligne: List[int]
+    :param taille: Taille de la grille de jeu
+    :type taille: int
+    :return: La ligne après complétion
+    :rtype: List[int]
     """
-    raise NotImplementedError("Fonction _completer_zeros non implémentée.")
+    return ligne.copy() + (taille-len(ligne))*[0]
 
 def _deplacer_gauche(plateau) : # ajouter les annotations de type
     """
