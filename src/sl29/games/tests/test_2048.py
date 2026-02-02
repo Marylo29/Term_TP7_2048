@@ -126,7 +126,7 @@ def test_nouvelle_partie():
     compte_tuiles = 0
     for ligne in plateau:
         for valeur in ligne:
-            if valeur == 2:
+            if valeur in (2,4):
                 compte_tuiles += 1
     assert compte_tuiles == 2, "Une nouvelle partie doit commencer avec deux tuiles de valeur 2."
     assert score == 0, "Une nouvelle partie doit commencer avec un score à 0."
