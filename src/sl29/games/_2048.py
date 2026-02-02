@@ -162,9 +162,14 @@ def _deplacer_droite(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
 
 def _transposer(plateau): # ajouter les annotations de type
     """
-    DOCSTRING À ÉCRIRE
+    Crée la grille transposée
+
+    :param plateau: La grille actuelle.
+    :type plateau: List[List[int]]
+    :return: La grille après changements
+    :rtype: List[List[int]]
     """
-    raise NotImplementedError("Fonction _transposer non implémentée.")
+    return [[plateau[j][i] for j in range(len(plateau))] for i in range(len(plateau))]
 
 def _deplacer_haut(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     """
