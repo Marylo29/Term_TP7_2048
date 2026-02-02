@@ -189,7 +189,8 @@ def _deplacer_bas(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     :param plateau: La grille actuelle du jeu.
     :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
     """
-    raise NotImplementedError("Fonction _deplacer_bas non implémentée.")
+    grille,points = _deplacer_droite(_transposer(plateau))
+    return _transposer(grille),points
 
 def _partie_terminee(plateau: List[List[int]]) -> bool:
     """
