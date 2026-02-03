@@ -68,7 +68,7 @@ def jouer() -> None:
     traite les commandes utilisateur, et vérifie la fin de partie.
     Supporte l'option --no-clear pour désactiver le nettoyage du terminal.
     """
-    plateau, score = nouvelle_partie()
+    jeu = nouvelle_partie()
 
     # Le clear est maintenant activé par défaut
     clear = True
@@ -92,8 +92,10 @@ def jouer() -> None:
 
         commande = demander_commande()
         if commande in ('g', 'd', 'b', 'h'):
-            plateau, points, fini = jouer_coup(plateau, commande)
-            score += points
+            jeu = jouer_coup(jeu, commande)
+            plateau = jeu.plateau
+            score = jeu.score
+            fini = jeu.fini
             if fini:
 
                 if clear:

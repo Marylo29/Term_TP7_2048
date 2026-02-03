@@ -1,30 +1,21 @@
 """Tests simples pour l'API publique du module 2048 (français)."""
 
 from sl29.games._2048 import (  # type: ignore
-    TAILLE,
-    _creer_plateau_vide,
-    _get_cases_vides,
-    _ajouter_tuile,
-    nouvelle_partie,
-    _supprimer_zeros,
-    _fusionner,
+    game_2048,
     _completer_zeros,
-    _deplacer_gauche,
-    _inverser_lignes,
-    _deplacer_droite,
-    _transposer,
-    _deplacer_haut,
-    _deplacer_bas,
-    _partie_terminee,
+    _fusionner,
+    _supprimer_zeros,
+    nouvelle_partie,
     jouer_coup,
 )
 
 def test__creer_plateau_vide():
     print("----> Tests de _creer_plateau_vide...")
-    plateau = _creer_plateau_vide()
-    assert len(plateau) == TAILLE # 4 lignes
+    game = game_2048(taille=4)
+    plateau = game.plateau
+    assert len(plateau) == 4 # 4 lignes
     for ligne in plateau:
-        assert len(ligne) == TAILLE # 4 colonnes
+        assert len(ligne) == 4 # 4 colonnes
         for valeur in ligne:
             assert valeur == 0, "chaque case devrait contenir 0." # toutes les cases à 0
     print("OK")
@@ -37,14 +28,16 @@ def test__get_cases_vides():
         [2, 2, 2, 2],
         [8, 2, 4, 0],
     ]
-    assert _get_cases_vides(plateau) == [(0,0),(0,3),(1,1),(1,3),(3,3)]
+    assert game_2048(plateau)._get_cases_vides() == [(0,0),(0,3),(1,1),(1,3),(3,3)]
     print("OK")
 
 
 def test__ajouter_tuile():
     print("----> Tests de _ajouter_tuile...")
-    plateau = _creer_plateau_vide()
-    nouveau_plateau = _ajouter_tuile(plateau)
+    jeu = game_2048()
+    plateau = jeu.plateau
+    jeu._ajouter_tuile()
+    nouveau_plateau = jeu.plateau
     # Vérifier qu'une seule tuile a été ajoutée
     compte_tuiles = 0
     for ligne in nouveau_plateau:
@@ -60,7 +53,7 @@ def test__ajouter_tuile():
         [0, 0, 0, 0],
         [0, 0, 0, 0],
     ]
-    nouveau_plateau2 = _ajouter_tuile(plateau_non_vide)
+    nouveau_plateau2 = (game_2048(plateau_non_vide)._ajouter_tuile()).plateau
     # Vérifier qu'une seule tuile a été ajoutée
     compte_tuiles2 = 0
     for ligne in nouveau_plateau2:
