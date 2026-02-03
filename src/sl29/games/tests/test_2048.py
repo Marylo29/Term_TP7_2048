@@ -269,7 +269,6 @@ def test_jouer_coup():
     ]
     # Si on joue à droite, le 2 doit bouger, donc une nouvelle tuile doit apparaître.
     nouveau, points, _ = jouer_coup(plateau_init, "d")
-
     compte = sum(1 for ligne in nouveau for v in ligne if v > 0)
     assert compte == 2, f"Une nouvelle tuile aurait dû apparaître. Attendu 2 tuiles, obtenu {compte}"
     assert nouveau[0][3] == 2, "Le 2 initial aurait dû se déplacer à l'indice [0][3]"
@@ -284,7 +283,7 @@ def test_jouer_coup():
     ]
     # On essaie de jouer à gauche (déjà collé). Rien ne doit changer, aucune tuile ajoutée.
     nouveau2, _, _ = jouer_coup(plateau_bloque, "g")
-
+    
     assert nouveau2 == plateau_bloque, "Le plateau ne devrait pas avoir changé"
     compte2 = sum(1 for ligne in nouveau2 for v in ligne if v > 0)
     assert compte2 == 4, "Aucune tuile ne doit être ajoutée si le mouvement n'a rien déplacé"

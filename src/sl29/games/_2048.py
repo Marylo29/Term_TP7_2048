@@ -33,8 +33,12 @@ def jouer_coup(plateau: List[List[int]], direction: str) -> tuple[List[List[int]
     :return: Retourne un tuple (nouveau_plateau, points, est_fini).
     :rtype: tuple[List[List[int]], int, bool]
     """
-
-    raise NotImplementedError("Fonction jouer_coup non implémentée.")
+    fonctions = {'g':_deplacer_gauche,'d':_deplacer_droite,'h':_deplacer_haut,'b':_deplacer_bas}
+    if direction in fonctions.keys():
+        nouv_plateau,score = fonctions[direction](plateau)
+        if nouv_plateau != plateau:
+            nouv_plateau = _ajouter_tuile(nouv_plateau)
+        return (nouv_plateau,score,_partie_terminee(nouv_plateau))
 
 # ==========================================================
 # 🔒 FONCTIONS PRIVÉES (LOGIQUE INTERNE)
@@ -70,7 +74,7 @@ def _ajouter_tuile(plateau: List[List[int]]) -> List[List[int]]:
     """
     tuiles_vides = _get_cases_vides(plateau)
     endroit = tuiles_vides[randint(0,len(tuiles_vides)-1)]
-    return [[plateau[i][j] if (i,j) != endroit else (2 if randint(0,9) > 0 else 4) for i in range(len(plateau))] for j in range(len(plateau))]
+    return [[plateau[i][j] if (i,j) != endroit else (2 if randint(0,9) > 0 else 4) for j in range(len(plateau))] for i in range(len(plateau))]
 
 def _supprimer_zeros(ligne: List[int]) -> List[int]:
     """
@@ -194,10 +198,21 @@ def _deplacer_bas(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
 
 def _partie_terminee(plateau: List[List[int]]) -> bool:
     """
-    DOCSTRING À ÉCRIRE
+    Retourne si la partie est finie
+
+    :param plateau: La grille actuelle du jeu.
+    :return: Un booleen si la partie est finie ou pas
     """
     # Partie non terminee si il y a des cases vides
+    if len(_get_cases_vides(plateau)) > 0:
+        return False
     # Partie non terminee si il y a des fusions possibles (horizontale ou verticale)
+    for plateau_c in (plateau,_transposer(plateau)):
+        for ligne in plateau_c:
+            last = ligne[0]
+            for i in range(1,len(ligne)):
+                if ligne[i] == last:
+                    return False
+                last = ligne[i]
     # Sinon c'est vrai
-
-    raise NotImplementedError("Fonction _partie_terminee non implémentée.")
+    return True
